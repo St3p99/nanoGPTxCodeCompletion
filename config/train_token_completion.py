@@ -12,7 +12,7 @@ wandb_project = 'token-completion'
 wandb_run_name = 'mini-gpt'
 
 dataset = 'token_completion'
-batch_size = 8
+batch_size = 12
 block_size = 256 # context of up to 256 previous characters
 
 # baby GPT model :)
@@ -30,11 +30,11 @@ beta2 = 0.99 # make a bit bigger because number of tokens per iter is small
 warmup_iters = 100 # not super necessary potentially
 
 # DDP settings
-backend = 'gloo'
+backend = 'nccl' # 'nccl', 'gloo', etc.
 # system
-device = 'cpu' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
-dtype = 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
-compile = False # use PyTorch 2.0 to compile the model to be faster
+device = 'cuda:0' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
+dtype = 'bfloat16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
+compile = True # use PyTorch 2.0 to compile the model to be faster
 
 # on macbook also add
 # device = 'cpu'  # run on cpu only
