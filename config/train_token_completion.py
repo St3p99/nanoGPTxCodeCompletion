@@ -36,9 +36,6 @@ device = 'cuda:0' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mp
 dtype = 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
 compile = False # use PyTorch 2.0 to compile the model to be faster
 
-#COLAB
-colab = True
-auto_dwn_ckpt = True
 
 # on macbook also add
 # device = 'cpu'  # run on cpu only
