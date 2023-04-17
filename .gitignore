@@ -5,3 +5,4 @@ __pycache__/
 data/token_completion/*.bin
 data/token_completion/*.txt
 out-token-completion/*
+nanoGPTxCodeCompletion.ipynb

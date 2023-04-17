@@ -125,14 +125,23 @@ iter_num = 0
 best_val_loss = 1e9
 
 # attempt to derive vocab_size from the dataset
-meta_path = os.path.join(data_dir, 'meta.pkl')
-meta_vocab_size = None
-if os.path.exists(meta_path):
-    with open(meta_path, 'rb') as f:
-        meta = pickle.load(f)
-    meta_vocab_size = meta['vocab_size']
-    print(f"found vocab_size = {meta_vocab_size} (inside {meta_path})")
+# meta_path = os.path.join(data_dir, 'meta.pkl')
+# meta_vocab_size = None
+# if os.path.exists(meta_path):
+#     with open(meta_path, 'rb') as f:
+#         meta = pickle.load(f)
+#     meta_vocab_size = meta['vocab_size']
+#     print(f"found vocab_size = {meta_vocab_size} (inside {meta_path})")
 
+# retrieve vocab_size from tokenizer
+meta_vocab_size=None
+try:
+    with open('out-token-completion/tokenizer.pkl', 'rb') as handle:
+        tokenizer = pickle.load(handle)
+        meta_vocab_size = 64*round(len(tokenizer)/64) # padding vocab size to nearest multiple of 64 for efficiency
+        print(meta_vocab_size)
+except Exception:
+    print('failed to load tokenizer')
 # model init
 model_args = dict(n_layer=n_layer, n_head=n_head, n_embd=n_embd, block_size=block_size,
                   bias=bias, vocab_size=None, dropout=dropout) # start with model_args from command line
