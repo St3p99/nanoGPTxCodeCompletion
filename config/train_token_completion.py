@@ -12,7 +12,7 @@ wandb_project = 'token-completion'
 wandb_run_name = 'mini-gpt'
 
 dataset = 'token_completion'
-batch_size = 32
+batch_size = 16
 block_size = 256 # context of up to 256 previous characters
 
 # baby GPT model :)
