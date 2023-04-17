@@ -38,8 +38,10 @@ def prepare(file_type):
        unk_token='<|UNKNOWN|>', 
        additional_special_tokens=special_tokens
     )
-    with open('../../out-token-completion/tokenizer.pkl', 'wb') as handle:
-        pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    if not os.path.isdir(out_dir):    
+        os.makedirs(out_dir)
+        with open(os.path.join(out_dir,'tokenizer.pkl'), 'wb') as handle:
+            pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     ids = tokenizer.encode(data)
     print(f"{file_type} has {len(ids):,} tokens")
