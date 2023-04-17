@@ -138,7 +138,7 @@ meta_vocab_size=None
 try:
     with open('out-token-completion/tokenizer.pkl', 'rb') as handle:
         tokenizer = pickle.load(handle)
-        meta_vocab_size = 64*round(len(tokenizer)/64) # padding vocab size to nearest multiple of 64 for efficiency
+        meta_vocab_size = 64*math.ceil(len(tokenizer)/64) # padding vocab size to nearest multiple of 64 for efficiency
         print(meta_vocab_size)
 except Exception:
     print('failed to load tokenizer')
