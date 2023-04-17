@@ -34,7 +34,7 @@ backend = 'nccl' # 'nccl', 'gloo', etc.
 # system
 device = 'cuda:0' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
 dtype = 'bfloat16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
-compile = False # use PyTorch 2.0 to compile the model to be faster
+compile = False # use PyTorch 2.0 to compile the model to be fastersussuss
 
 
 # on macbook also add
