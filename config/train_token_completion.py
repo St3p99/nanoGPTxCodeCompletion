@@ -30,11 +30,15 @@ beta2 = 0.99 # make a bit bigger because number of tokens per iter is small
 warmup_iters = 100 # not super necessary potentially
 
 # DDP settings
-backend = 'nccl' # 'nccl', 'gloo', etc.
+backend = 'gloo' # 'nccl', 'gloo', etc.
 # system
 device = 'cuda:0' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
-dtype = 'bfloat16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
-compile = True # use PyTorch 2.0 to compile the model to be faster
+dtype = 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
+compile = False # use PyTorch 2.0 to compile the model to be faster
+
+#COLAB
+colab = True
+auto_dwn_ckpt = True
 
 # on macbook also add
 # device = 'cpu'  # run on cpu only
