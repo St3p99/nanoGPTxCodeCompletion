@@ -1,9 +1,9 @@
 
 # train a miniature code completion model
 out_dir = 'out-token-completion'
-eval_interval = 250 # keep frequent because we'll overfit
+eval_interval = 500 # keep frequent because we'll overfit
 eval_iters = 200
-log_interval = 10 # don't print too too often
+log_interval = 100 # don't print too too often
 
 # we expect to overfit on this small dataset, so only save when val improves
 always_save_checkpoint = False
@@ -14,19 +14,13 @@ wandb_run_name = 'mini-gpt'
 
 dataset = 'token_completion'
 batch_size = 8
-block_size = 256 # context of up to 256 previous characters
-
-# baby GPT model :)
-n_layer = 6
-n_head = 6
-n_embd = 384
-dropout = 0
+block_size = 512 # context of up to 512 previous characters
 
 # toddler GPT model :)
-# n_layer = 12
-# n_head = 12
-# n_embd = 768
-# dropout = 0.0 # for pretraining 0 is good, for finetuning try 0.1+
+n_layer = 8
+n_head = 8
+n_embd = 512
+dropout = 0
 
 learning_rate = 1e-3 # with baby networks can afford to go a bit higher
 max_iters = 10000
