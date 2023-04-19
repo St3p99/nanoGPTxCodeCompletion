@@ -12,7 +12,7 @@ import re
 import javalang
 import json
 
-lits = json.load(open("literals.json"))
+lits = json.load(open(os.path.join(os.path.dirname(__file__), "literals.json")))
 
 def process_string(token, special_chars={" ": "U+0020", ",": "U+002C"}):
     str_quote_options = ["'''", '"""', "'", '"']
@@ -53,7 +53,7 @@ def process_string(token, special_chars={" ": "U+0020", ",": "U+002C"}):
         )
     return ret
 
-def preprocess(args, file_name, file_type):
+def preprocess_file(args, file_name, file_type):
     contents = open(os.path.join(args.base_dir, file_name)).readlines()
     wf = open(os.path.join(args.output_dir, f"{file_type}.txt"), 'w')
 
@@ -82,6 +82,36 @@ def preprocess(args, file_name, file_type):
     print(f"{file_type} are done")
     wf.close()
 
+def preprocess_input(content):    
+    # txt to one line
+    content = content.replace('\t', ' ').replace('\n', ' ')
+    # # multiple spaces to one
+    # content = re.sub(r'\s+', ' ', content)
+    # Split words and symbols
+    content = re.findall(r'\w+|\W', content)
+    
+    # new_data = []
+    # try:
+    #     for tok in list(javalang.tokenizer.tokenize(content)):
+    #         if "String" in str(type(tok)) or "Character" in str(type(tok)):
+    #             token = process_string(tok.value)
+    #         elif "Integer" in str(type(tok)) or "FloatingPoint" in str(type(tok)):
+    #             if tok.value in lits['num']:
+    #                 token = f"<NUM_LIT:{tok.value}>"
+    #             else:
+    #                 token = "<NUM_LIT>"
+    #         else:
+    #             token = tok.value
+    #         new_data.append(token)
+    # except Exception:
+    #     pass
+    # if len(new_data) == 0:
+    #     pass
+    # data = "<s> " + " ".join(new_data) + " </s>"
+    # return data
+    # return "<s> " + " ".join(content) + " </s>"
+    return " ".join(content)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--base_dir", default="token_completion", type=str, 
@@ -93,9 +123,9 @@ def main():
     if not os.path.exists(args.output_dir):
         os.makedirs(args.output_dir)
 
-    preprocess(args, file_name="train.txt", file_type="train")
-    preprocess(args, file_name="val.txt", file_type="val")
-    preprocess(args, file_name="test.txt", file_type="test")
+    preprocess_file(args, file_name="train.txt", file_type="train")
+    preprocess_file(args, file_name="val.txt", file_type="val")
+    preprocess_file(args, file_name="test.txt", file_type="test")
 
 if __name__ == "__main__":
     main()

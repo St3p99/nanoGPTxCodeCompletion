@@ -4,5 +4,6 @@ __pycache__/
 *.pyc
 data/token_completion/*.bin
 data/token_completion/*.txt
+data/line_completion/*.json
 out-token-completion/*
 nanoGPTxCodeCompletion.ipynb
