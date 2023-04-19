@@ -1,3 +1,4 @@
+
 # train a miniature code completion model
 out_dir = 'out-token-completion'
 eval_interval = 250 # keep frequent because we'll overfit
@@ -16,10 +17,16 @@ batch_size = 8
 block_size = 256 # context of up to 256 previous characters
 
 # baby GPT model :)
-n_layer = 6
-n_head = 6
-n_embd = 384
-dropout = 0.2
+# n_layer = 6
+# n_head = 6
+# n_embd = 384
+# dropout = 0.2
+
+# toddler GPT model :)
+n_layer = 12
+n_head = 12
+n_embd = 768
+dropout = 0.0 # for pretraining 0 is good, for finetuning try 0.1+
 
 learning_rate = 1e-3 # with baby networks can afford to go a bit higher
 max_iters = 2000
